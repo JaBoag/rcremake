@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../main.css">
+    <title>Index</title>
+</head>
+<body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDfa3gH1Y5lO-o_L0OJA9kTvswndMJmc_c",
+    authDomain: "rcremake.firebaseapp.com",
+    projectId: "rcremake",
+    storageBucket: "rcremake.appspot.com",
+    messagingSenderId: "563482044041",
+    appId: "1:563482044041:web:69f60b4a823244927b4858"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var db = firebase.firestore();
+</script>
+<container>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+    <div id="div4"></div>
+    <div id="div5"></div>
+    <div id="div6"></div>
+</container>
+
+
+<script>
+
+var i;
+
+for(i = 0; i < 7; i++){
+    getData(i)
+}
+
+function getData(i){
+    var docRef = db.collection("gamescore").doc(i.toString());
+
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+            var docContent = doc.data();
+            var docPlayer = docContent["player"];
+            var docScore = docContent["score"];
+            var h2 = document.createElement("H1");
+            var h1 = document.createElement("h1");
+            var t1 = document.createTextNode( "Player: "+docPlayer);
+            var t2 = document.createTextNode("Score: "+docScore);
+            var playerName = "player";
+            h1.appendChild(t1);
+            h2.appendChild(t2);
+            document.getElementById("div"+docPlayer).appendChild(h1);
+            document.getElementById("div"+docPlayer).appendChild(h2);
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+}
+
+
+</script>
+
+</body>
+</html>

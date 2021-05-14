@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="../../main.css">
+</head>
+<body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.6.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDfa3gH1Y5lO-o_L0OJA9kTvswndMJmc_c",
+    authDomain: "rcremake.firebaseapp.com",
+    projectId: "rcremake",
+    storageBucket: "rcremake.appspot.com",
+    messagingSenderId: "563482044041",
+    appId: "1:563482044041:web:69f60b4a823244927b4858"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var db = firebase.firestore();
+</script>
+<input type="button" value="1st Place" onClick="setScore(1);"/>
+<input type="button" value="2nd Place" onClick="setScore(2);"/>
+<input type="button" value="3rd Place" onClick="setScore(3);"/>
+<input type="button" value="4th Place" onClick="setScore(4);"/>
+<input type="button" value="5th Place" onClick="setScore(5);"/>
+<input type="button" value="6th Place" onClick="setScore(6);"/>
+
+<script>
+function setScore(score){
+    db.collection("gamescore").doc("3").set({
+    player: "3",
+    score: score,
+    })
+    .then(() => {
+        console.log("Document successfully written!");
+    })
+    .catch((error) => {
+        console.error("Error writing document: ", error);
+    });
+}
+
+</script>
+
+</body>
+</html>
